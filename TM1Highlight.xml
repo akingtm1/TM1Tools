@@ -1,0 +1,64 @@
+<NotepadPlus>
+    <UserLang name="TM1 TI" ext="pro rux" udlVersion="2.1">
+        <Settings>
+            <Global caseIgnored="yes" allowFoldOfComments="no" foldCompact="yes" forcePureLC="0" decimalSeparator="0" />
+            <Prefix Keywords1="no" Keywords2="no" Keywords3="no" Keywords4="no" Keywords5="no" Keywords6="no" Keywords7="no" Keywords8="no" />
+        </Settings>
+        <KeywordLists>
+            <Keywords name="Comments">00# 01 02 03 04</Keywords>
+            <Keywords name="Numbers, prefix1"></Keywords>
+            <Keywords name="Numbers, prefix2"></Keywords>
+            <Keywords name="Numbers, extras1"></Keywords>
+            <Keywords name="Numbers, extras2"></Keywords>
+            <Keywords name="Numbers, suffix1"></Keywords>
+            <Keywords name="Numbers, suffix2"></Keywords>
+            <Keywords name="Numbers, range"></Keywords>
+            <Keywords name="Operators1">&apos; - % &amp; ( ) * , / ; @ [ ] | ~ + &lt; = &gt; { }</Keywords>
+            <Keywords name="Operators2">!</Keywords>
+            <Keywords name="Folders in code1, open">IF</Keywords>
+            <Keywords name="Folders in code1, middle">ELSE ELSEIF</Keywords>
+            <Keywords name="Folders in code1, close">ENDIF</Keywords>
+            <Keywords name="Folders in code2, open">WHILE</Keywords>
+            <Keywords name="Folders in code2, middle"></Keywords>
+            <Keywords name="Folders in code2, close">END</Keywords>
+            <Keywords name="Folders in comment, open"></Keywords>
+            <Keywords name="Folders in comment, middle"></Keywords>
+            <Keywords name="Folders in comment, close"></Keywords>
+            <Keywords name="Keywords1">break else elseif end endif if while</Keywords>
+            <Keywords name="Keywords2">DatasourceASCIIDecimalSeparator DatasourceASCIIDelimiter DatasourceASCIIHeaderRecords DatasourceASCIIQuoteCharacter DatasourceASCIIThousandSeparator DatasourceCubeview DatasourceDimensionSubset DatasourceNameForClient DatasourceNameForServer DatasourceODBOCatalog DatasourceODBOConnectionString DatasourceODBOCubeName DatasourceODBOHierarchyName DatasourceODBOLocation DatasourceODBOProvider DatasourceODBOSAPClientId DatasourceODBOSAPClientLanguage DatasourcePassword DatasourceQuery DatasourceType DatasourceUseCallerProcessConnection DatasourceUsername MinorErrorLogMax NValue OnMinorErrorDoItemSkip SValue Value_Is_String DataMinorErrorCount MetadataMinorErrorCount ProcessReturnCode PrologMinorErrorCount</Keywords>
+            <Keywords name="Keywords3">AddClient AddGroup ASCIIDelete ASCIIOutput AssignClientPassword AssignClientToGroup AttrDelete AttrInsert AttrPutN AttrPutS BatchUpdateFinish BatchUpdateFinishWait BatchUpdateStart CellGetN CellGetS CellIsUpdateable CellPutN CellIncrementN CellPutProportionalSpread CellPutS ChoreQuit CubeClearData CubeCreate CubeDestroy CubeExists CubeGetLogChanges CubeProcessFeeders CubeSaveData CubeSetConnParams CubeSetLogChanges CubeUnload DeleteClient DeleteGroup DimensionCreate DimensionDeleteAllElements DimensionDestroy DimensionElementComponentAdd DimensionElementComponentDelete DimensionElementDelete DimensionElementInsert DimensionElementPrincipalName DimensionExists DimensionSortOrder ElementSecurityGet ElementSecurityPut ExecuteCommand ExecuteProcess Expand FileExists GetProcessErrorFileDirectory GetProcessErrorFilename ItemReject ItemSkip NumberToString NumberToStringEx NumericGlobalVariable NumericSessionVariable ODBCClose ODBCOpen ODBCOutput ProcessBreak ProcessError ProcessQuit ProcessExitByBreak ProcessExitByChoreQuit ProcessExitByQuit ProcessExitMinorError ProcessExitNormal ProcessExitOnInit ProcessExitSeriousError ProcessExitWithMessage PublishView RemoveClientFromGroup ReturnViewHandle RuleLoadFromFile SaveDataAll SecurityRefresh ServerShutDown SetChoreVerboseMessages SetInputCharacterSet SetOutputCharacterSet StringGlobalVariable StringSessionVariable StringToNumber StringToNumberEx SubsetAliasSet SubsetCreate SubsetCreatebyMDX SubsetDeleteAllElements SubsetDestroy SubsetElementDelete SubsetElementInsert SubsetExists SubsetExpandAboveSet SubsetFormatStyleSet SubsetGetElementName SubsetGetSize SubsetIsAllSet SubsetMDXSet SwapAliasWithPrincipalName TextOutput ViewColumnDimensionSet ViewColumnSuppressZeroesSet ViewConstruct ViewCreate ViewDestroy ViewExists ViewExtractSkipCalcsSet ViewExtractSkipRuleValuesSet ViewExtractSkipZeroesSet ViewRowDimensionSet ViewRowSuppressZeroesSet ViewSubsetAssign ViewSuppressZeroesSet ViewTitleDimensionSet ViewTitleElementSet ViewZeroOut WildcardFileSearch AllowExternalRequests AttrToAlias CubeLockOverride CubeSetIsVirtual CubeSetSAPVariablesClause CubeSetSlicerMembers DimensionEditingAliasSet DimensionElementInsertByAlias EncodePassword IsNull LockOff LockOn ReturnSQLTableHandle ViewSetSkipCalcs ViewSetSkipRuleValues ViewSetSkipZeroes GetProcessName</Keywords>
+            <Keywords name="Keywords4">ABS ACOS ASIN ATAN ATTRN ATTRS CAPIT CHAR CODE CONTINUE COS DATE DATES DAY DAYNO DB DELET DFRST DIMIX DIMNM DIMSIZ DNEXT DNLEV DTYPE ELCOMP ELCOMPN ELISANC ELISCOMP ELISPAR ELLEV ELPAR ELPARN ELWEIGHT EXP FEEDERS FEEDSTRINGS FILL FV IF INSRT INT ISLEAF ISUND LN LOG LONG LOWER MAX MIN MOD MONTH NOW NUMBR PAYMT PV RAND ROUND ROUNDP SCAN SIGN SIN SKIPCHECK SQRT STR SUBNM SUBSIZ SUBST TABDIM TAN TIME TIMST TIMVL TODAY TRIM UNDEF UNDEFVALS UPPER YEAR AVG BANNR BDATE BDAYN CENTR CNT COL DATFM DBG16 DBGEN DISPLY DYS HEX IRR LIN LOOK MEM MOS NCELL NPV RIGHT SCELL SLEEP STDDV SUM VAR WHOAMI WIDTH YRS TM1USER</Keywords>
+            <Keywords name="Keywords5"></Keywords>
+            <Keywords name="Keywords6"></Keywords>
+            <Keywords name="Keywords7"></Keywords>
+            <Keywords name="Keywords8"></Keywords>
+            <Keywords name="Delimiters">00&apos; 01 02&apos; 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23</Keywords>
+        </KeywordLists>
+        <Styles>
+            <WordsStyle name="DEFAULT" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="COMMENTS" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="LINE COMMENTS" fgColor="008000" bgColor="FFFFFF" fontName="" fontStyle="4" nesting="0" />
+            <WordsStyle name="NUMBERS" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS1" fgColor="0000FF" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS2" fgColor="008080" bgColor="FFFFFF" fontName="" fontStyle="1" nesting="0" />
+            <WordsStyle name="KEYWORDS3" fgColor="FF0000" bgColor="FFFFFF" fontName="" fontStyle="1" nesting="0" />
+            <WordsStyle name="KEYWORDS4" fgColor="FF8080" bgColor="FFFFFF" fontName="" fontStyle="1" nesting="0" />
+            <WordsStyle name="KEYWORDS5" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS6" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS7" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS8" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="OPERATORS" fgColor="000000" bgColor="C0C0C0" fontName="" fontStyle="1" nesting="0" />
+            <WordsStyle name="FOLDER IN CODE1" fgColor="0000FF" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="FOLDER IN CODE2" fgColor="0000FF" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="FOLDER IN COMMENT" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS1" fgColor="FF8000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS2" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS3" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS4" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS5" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS6" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS7" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS8" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+        </Styles>
+    </UserLang>
+</NotepadPlus>
