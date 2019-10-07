@@ -124,7 +124,7 @@
 ; =====================================================
 ::@AddClient::AddClient( ClientName )
 ::@AddGroup::AddGroup( GroupName )
-::@ASCIIDelete::ASCIIDelete( FileName )
+::@ASCIIDelete::ASCIIDelete( FileName );
 ::@ASCIIOutput::ASCIIOutput( FileName, String1, String2, ...StringN )
 ::@AssignClientPassword::AssignClientPassword ( ClientName, Password )
 ::@AssignClientToGroup::AssignClientToGroup( ClientName, GroupName )
@@ -145,6 +145,7 @@
 ::@CubeExists::CubeExists( CubeName )
 ::@CubeGetLogChanges::CubeGetLogChanges( CubeName )
 ::@CubeProcessFeeders::CubeProcessFeeders( CubeName )
+::@CubeSaveData::CubeSaveData( cubeName );
 ::@CubeSetLogChanges::CubeSetLogChanges( CubeName, LogChanges )
 ::@CubeUnload::CubeUnload( CubeName )
 ::@DeleteClient::DeleteClient( ClientName )
@@ -162,7 +163,7 @@
 ::@ElementSecurityGet::ElementSecurityGet( DimName, ElName, Group )
 ::@ElementSecurityPut::ElementSecurityPut( Level, DimName, ElName, Group )
 ::@ExecuteCommand::ExecuteCommand( CommandLine, Wait )
-::@ExecuteProcess::ExecuteProcess( ProcessName, [ParamName1, ParamValue1, ParamName2, ParamValue2] )
+::@ExecuteProcess::ExecuteProcess( ProcessName, [ParamName1, ParamValue1, ParamName2, ParamValue2] );
 ::@Expand::Expand( String )
 ::@FileExists::FileExists( File )
 ::@ItemReject::ItemReject( ErrorString )
@@ -174,6 +175,7 @@
 ::@PublishView::PublishView( CubeName, View, PublishPrivateSubsets, OverwriteExistingView )
 ::@RemoveClientFromGroup::RemoveClientFromGroup( ClientName, GroupName )
 ::@RuleLoadFromFile::RuleLoadFromFile( CubeName, TextFile )
+::@RunProcess::RunProcess( ProcessName, [ParamName1, ParamValue1, ParamName2, ParamValue2] );
 ::@ServerShutDown::ServerShutDown( SaveData )
 ::@SetChoreVerboseMessages::SetChoreVerboseMessages( Flag )
 ::@SetInputCharacterSet::SetInputCharacterSet ( CharacterSet )
@@ -193,6 +195,7 @@
 ::@SubsetGetElementName::SubsetGetElementName( DimName, SubsetName, ElementIndex )
 ::@SubsetGetSize::SubsetGetSize( DimName, SubsetName )
 ::@SubsetIsAllSet::SubsetIsAllSet( DimName, SubName, Flag )
+::@SubsetMDXSet::SubsetMDXSet( dimName, subName, [MDX_expression] );
 ::@TextOutput::TextOutput( FileName, String1, String2, ...Stringn )
 ::@ViewColumnDimensionSet::ViewColumnDimensionSet( CubeName, ViewName, DimName, StackPosition )
 ::@ViewColumnSuppressZeroesSet::ViewColumnSuppressZeroesSet( CubeName, ViewName, Flag )
@@ -230,20 +233,22 @@
 ::@Subnm::SubsetGetElementName( DimName, SubsetName, ElementIndex )
 ::@ViewColSet::ViewColumnDimensionSet( CubeName, ViewName, DimName, StackPosition )
 ::@ViewRowSet::ViewRowDimensionSet( CubeName, ViewName, DimName, StackPosition )
+::@SubsetSetMDX::SubsetMDXSet( dimName, subName, [MDX_expression] );
 
 ; =====================================================
 ; MACRO CODE BLOCKS
 ; =====================================================
-::@IFI::IF( VAL @<>= 0 ); THEN; ENDIF;
+::@tf::TRUE = 1;FALSE = 0;
+::@ifi::IF( VAL @<>= 0 ); THEN; ENDIF;
 
-::@IFT::
+::@ift::
 (
 IF( VAL @<>= 0 );
 
 ENDIF;
 )
 
-::@IFE::
+::@ife::
 (
 IF( VAL @<>= 0 );
 
@@ -252,12 +257,23 @@ ELSE;
 ENDIF;
 )
 
-::@IFNS::
+::@ifns::
 (
 IF( VALUE_IS_STRING = 0 );
 CellPutN( NVALUE, CubeName, e1, e2 [, ...en] );
 ELSE;
 CellPutS( SVALUE, CubeName, e1, e2 [, ...en] );
+ENDIF;
+)
+
+::@ifnsu::
+(
+IF( CellIsUpdateable( CubeName, e1, e2 [, ...en] );
+IF( VALUE_IS_STRING = 0 );
+CellPutN( NVALUE, CubeName, e1, e2 [, ...en] );
+ELSE;
+CellPutS( SVALUE, CubeName, e1, e2 [, ...en] );
+ENDIF;
 ENDIF;
 )
 
@@ -281,7 +297,7 @@ numIndex = numIndex - 1;
 END;
 )
 
-::@WHILER::
+::@whiler::
 (
 strStack = elemStart | ';';
 WHILE( LONG( strStack ) > 0 );
@@ -400,15 +416,6 @@ numChanges = CubeGetLogChanges( cubeTarget );
 CubeSetLogChanges( cubeTarget, 0 );
 )
 
-::@CellPut::
-(
-IF( VALUE_IS_STRING = TRUE );
-CellPutS( SVALUE, cubeTarget, e1, e2 [, ...en] );
-ELSE;
-CellPutN( NVALUE, cubeTarget, e1, e2 [, ...en] );
-ENDIF;
-)
-
 ::@WreckView::
 (
 CubeSetLogChanges( cubeTarget, numChanges  );
@@ -455,13 +462,18 @@ DatasourceNameForServer = dimSource;
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 )
 
-; =====================================================
-; SYSTEM SPECIFIC (Paragon)
-; =====================================================
-::@dirDataIn::dirDataIn = CellGetS( 'System-Parameters', 'DataIn Directory', 'String Value');
-::@dirDataOut::dirDataOut = CellGetS( 'System-Parameters', 'DataOut Directory', 'String Value');
-::@dirTM1Data::dirTM1Data = CellGetS( 'System-Parameters', 'TM1 Data Directory', 'String Value');
-::@dirTM1Log::dirTM1Log = CellGetS( 'System-Parameters', 'TM1 Log Directory', 'String Value');;
+::@OutputParameters::
+(
+strParameters = '';
+WHILE( LONG( strParameters ) > 0 );
+numComma = SCAN( ',', strParameters | ',' );
+parCurrent = SUBST( strParameters, 1, numComma - 1 );
+strParameters = DELET( strParameters, 1, numComma );
+
+strMessage = parCurrent | ': ' | Expand( '%' | parCurrent | '%' );
+LogOutput( 'INFO', strMessage );
+END;
+)
 
 ::@OpenProfile::
 (
@@ -487,15 +499,15 @@ parCurrent = SUBST( strParameters, 1, numComma - 1 );
 strParameters = DELET( strParameters, 1, numComma );
 
 strMessage = parCurrent | ': ' | Expand( '%' | parCurrent | '%' );
-CellPutS( '[' | TIMST( NOW, strFormat ) | ' T+' | TIMST( NOW - timeStart, '\hh:\im:\ss' ) | ']  ' | strMessage,
-cubeProcessProfiles, procName, '1', NumberToString( numLine ) );
+#CellPutS( '[' | TIMST( NOW, strFormat ) | ' T+' | TIMST( NOW - timeStart, '\hh:\im:\ss' ) | ']  ' | strMessage,
+#cubeProcessProfiles, procName, '1', NumberToString( numLine ) );
+#LogOutput( 'INFO', strMessage );
 numLine = numLine + 1;
 END;
 #########################################################################
 # OPEN PROFILE: END
 #########################################################################
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-TRUE = 1;FALSE = 0;
 )
 
 ::@error::
@@ -560,4 +572,88 @@ cubeProcessProfiles, procName, '1', 'Completed' );
 # CLOSE PROFILE: END
 #########################################################################
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+)
+
+::@subdef::
+(
+IF( SubsetExists( dimSource, subSource ) = FALSE );
+strMDX = '{TM1FILTERBYLEVEL( {TM1SUBSETALL( [' | dimSource | '] )}, 0 )}';
+SubsetCreatebyMDX( subSource, strMDX );
+ENDIF;
+)
+
+::@whiletabdim::
+(
+numDimension = 1;
+WHILE( TABDIM( cubeSource, numDimension ) @<> '' );
+dimCurrent = TABDIM( cubeSource, numDimension );
+
+numDimension = numDimension + 1;
+END;
+)
+
+::@whilestr::
+(
+strSource = '';
+WHILE( LONG( strSource ) > 0 );
+numComma = SCAN( ',', strSource | ',' );
+strCurrent = SUBST( strSource, 1, numComma - 1 );
+strSource = DELET( strSource, 1, numComma );
+END;
+)
+
+::@whilecubes::
+(
+dimCubes = '}Cubes';
+numCube = 1;
+numCubes = DIMSIZ( dimCubes );
+WHILE( numCube <= numCubes );
+cubeCurrent = DIMNM( dimCubes, numCube );
+
+numCube = numCube + 1;
+END;
+)
+
+::@whiledims::
+(
+dimDims = '}Dimensions';
+numDim = 1;
+numDims = DIMSIZ( dimDims );
+WHILE( numDim <= numDims );
+cubeCurrent = DIMNM( dimDims, numDim );
+
+numDim = numDim + 1;
+END;
+)
+
+::@whilesubset::
+(
+#dimSource;
+#subSource;
+numElement = 1;
+numSubSize = SubsetGetSize( dimSource, subSource );
+WHILE( numElement <= numSubSize );
+elemTime = SubsetGetElementName( dimSource, subSource, numElement );
+
+numElement = numElement + 1;
+END;
+)
+
+::@replace::
+(
+strSource = '';
+strReplace = '';
+strWith = '';
+
+strResult = '';
+WHILE( LONG( strSource ) > 0 );
+numChar = SCAN( strReplace, strSource );
+IF( numChar > 0 );
+strResult = strResult | SUBST( strSource, 1, numChar - 1 ) | strWith;
+strSource = DELET( strSource, 1, numChar + LONG( strReplace ) - 1 );
+ELSE;
+strResult = strResult | strSource;
+strSource = '';
+ENDIF;
+END;
 )
